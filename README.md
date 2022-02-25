@@ -1,5 +1,7 @@
 # SWalk
-This is the official code for the WSDM 2022 paper: [`S-Walk: Accurate and Scalable Session-based Recommendation with Random Walks.`] (https://arxiv.org/abs/2201.01091).</br>
+This is the official code for the WSDM 2022 paper: <br>[`S-Walk: Accurate and Scalable Session-based Recommendation with Random Walks.`] (https://arxiv.org/abs/2201.01091).</br>
+
+
 We implemented our model based on the session-recommedndation framework [**session-rec**](https://github.com/rn5l/session-rec), and you can find the other session-based models and detailed usage on there.</br> 
 Thanks for sharing the code.
 
