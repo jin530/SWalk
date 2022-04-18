@@ -122,15 +122,14 @@ class SWALK:
                 print("P is made")
                 del G
                 if self.epsilon < 10.0:
-                    C = -P @ (input_matrix.transpose().dot(W2).dot(input_matrix-target_matrix).toarray())
+                    gamma = np.zeros(self.n_items)
+                    gamma += self.reg
+                    mu_nonzero_idx = np.where(1 - np.diag(P)*self.reg >= self.epsilon)
+                    gamma[mu_nonzero_idx] = (np.diag(1 - self.epsilon) / np.diag(P))[mu_nonzero_idx]
 
-                    mu = np.zeros(self.n_items)
-                    mu += self.reg
-                    mu_nonzero_idx = np.where(1 - np.diag(P)*self.reg + np.diag(C) >= self.epsilon)
-                    mu[mu_nonzero_idx] = (np.diag(1 - self.epsilon + C) / np.diag(P))[mu_nonzero_idx]
 
-                    # B = I - Pλ + C
-                    enc_w = np.identity(self.n_items, dtype=np.float32) - P @ np.diag(mu) + C
+                    # B = I - P·diagMat(γ)
+                    enc_w = np.identity(self.n_items, dtype=np.float32) - P @ np.diag(gamma)
                     print("weight matrix is made")
                 else:
                     enc_w = P @ input_matrix.transpose().dot(W2).dot(target_matrix).toarray()
